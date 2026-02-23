@@ -1,0 +1,67 @@
+plugins {
+    id 'org.springframework.boot' version '4.0.2' apply false
+    id 'io.spring.dependency-management' version '1.1.7' apply false
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'io.spring.dependency-management'
+
+    group = 'ru.itq.fun'
+    version = '0.0.1-SNAPSHOT'
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(21)
+        }
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.boot:spring-boot-dependencies:4.0.2"
+        }
+    }
+
+    dependencies {
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    }
+
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+
+    tasks.withType(JavaExec).configureEach {
+        notCompatibleWithConfigurationCache("JavaExec created by IntelliJ")
+    }
+
+    tasks.register('documentServiceRun') {
+        group = 'application'
+        description = 'Run document-service'
+        dependsOn ':document-service:bootRun'
+    }
+
+    tasks.register('generatorRun') {
+        group = 'application'
+        description = 'Run geerator service'
+        dependsOn ':generator:bootRun'
+    }
+
+    plugins.withId('org.springframework.boot') {
+        bootJar {
+            enabled = true
+        }
+    }
+
+    jar {
+        enabled = false
+    }
+
+}

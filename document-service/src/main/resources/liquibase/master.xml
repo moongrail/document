@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="001" author="LaysOnion" runOnChange="false">
+        <sqlFile path="liquibase/001-init_db.sql"
+                 relativeToChangelogFile="false"
+                 splitStatements="true"
+                 endDelimiter=";"/>
+    </changeSet>
+
+    <changeSet id="002" author="LaysOnion" runOnChange="false">
+        <sqlFile path="liquibase/002-fill_data.sql"
+                 relativeToChangelogFile="false"
+                 splitStatements="true"
+                 endDelimiter=";"/>
+    </changeSet>
+
+</databaseChangeLog>

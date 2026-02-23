@@ -1,0 +1,19 @@
+plugins {
+    id 'org.springframework.boot'
+}
+
+description = 'generator'
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+}
+
+bootJar {
+    enabled = true
+    archiveFileName = 'generator.jar'
+}
+
+jar {
+    enabled = false
+}

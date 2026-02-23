@@ -1,0 +1,13 @@
+generator:
+  count: 100
+  document-service-url: http://localhost:80/api/v1
+  batch-size: 10
+  initiator: GENERATOR
+logging:
+  level:
+    root: info
+spring:
+  application:
+    name: generator
+server:
+  port: 81

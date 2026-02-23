@@ -1,0 +1,32 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          batch_size: 50
+  liquibase:
+    change-log: classpath:liquibase/master-test.xml
+    enabled: true
+
+worker:
+  batch-size: 50
+  submit:
+    cron: "0 0 0 29 2 ?"
+  approve:
+    cron: "0 0 0 29 2 ?"
+  initiator: "TEST_WORKER"
+
+logging:
+  level:
+    ru.itq.fun.document: DEBUG
+    org.springframework.transaction: DEBUG
