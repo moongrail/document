@@ -14,8 +14,8 @@ public class GeneratorApplication {
 
     @SneakyThrows
     public static void main(String[] args) {
+        //Можно было и покрасивее сделать. и вообще отказаться
         SpringApplication.run(GeneratorApplication.class, args);
-        //Можно было и покрасивее сделать.
         Thread.sleep(20000);
         log.info("Graceful shutdown");
         System.exit(0);
