@@ -1,0 +1,324 @@
+{
+  "collection": {
+    "info": {
+      "_postman_id": "786caa78-70d4-402f-84a5-31adb60af8dc",
+      "name": "itq",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+      "createdAt": "2026-01-23T07:09:17.000Z",
+      "updatedAt": "2026-02-23T11:20:07.000Z",
+      "lastUpdatedBy": "16666229",
+      "uid": "16666229-786caa78-70d4-402f-84a5-31adb60af8dc"
+    },
+    "item": [
+      {
+        "name": "Посмотреть по айди",
+        "id": "80d2d14e-c196-4003-ab16-715cd2be8077",
+        "protocolProfileBehavior": {
+          "disableBodyPruning": true
+        },
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "localhost:80/api/v1/documents/1",
+            "host": [
+              "localhost"
+            ],
+            "port": "80",
+            "path": [
+              "api",
+              "v1",
+              "documents",
+              "1"
+            ]
+          }
+        },
+        "response": [],
+        "createdAt": "2026-02-19T13:11:30.000Z",
+        "updatedAt": "2026-02-23T11:18:38.000Z",
+        "uid": "16666229-80d2d14e-c196-4003-ab16-715cd2be8077"
+      },
+      {
+        "name": "Новый документ",
+        "id": "be3fc4f3-c8a3-4f69-8cf1-ec6deb07d0b0",
+        "protocolProfileBehavior": {
+          "disableBodyPruning": true
+        },
+        "request": {
+          "method": "POST",
+          "header": [],
+          "body": {
+            "mode": "raw",
+            "raw": "{\r\n    \"author\" : \"SHAssMIL\",\r\n    \"title\" : \"6u75iky6uu76oik\" \r\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          },
+          "url": {
+            "raw": "localhost:80/api/v1/documents",
+            "host": [
+              "localhost"
+            ],
+            "port": "80",
+            "path": [
+              "api",
+              "v1",
+              "documents"
+            ]
+          }
+        },
+        "response": [],
+        "createdAt": "2026-02-19T14:47:26.000Z",
+        "updatedAt": "2026-02-23T11:18:49.000Z",
+        "uid": "16666229-be3fc4f3-c8a3-4f69-8cf1-ec6deb07d0b0"
+      },
+      {
+        "name": "пейдж",
+        "id": "79ab0e4e-9739-4aea-a1dc-2c66d1088893",
+        "protocolProfileBehavior": {
+          "disableBodyPruning": true
+        },
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "localhost:80/api/v1/documents?ids=12222&ids=2&ids=3&page=0&size=20&sortBy=createdAt&sortDir=desc",
+            "host": [
+              "localhost"
+            ],
+            "port": "80",
+            "path": [
+              "api",
+              "v1",
+              "documents"
+            ],
+            "query": [
+              {
+                "key": "ids",
+                "value": "12222"
+              },
+              {
+                "key": "ids",
+                "value": "2"
+              },
+              {
+                "key": "ids",
+                "value": "3"
+              },
+              {
+                "key": "page",
+                "value": "0"
+              },
+              {
+                "key": "size",
+                "value": "20"
+              },
+              {
+                "key": "sortBy",
+                "value": "createdAt"
+              },
+              {
+                "key": "sortDir",
+                "value": "desc"
+              }
+            ]
+          }
+        },
+        "response": [],
+        "createdAt": "2026-02-19T18:25:55.000Z",
+        "updatedAt": "2026-02-23T11:19:02.000Z",
+        "uid": "16666229-79ab0e4e-9739-4aea-a1dc-2c66d1088893"
+      },
+      {
+        "name": "сабмит",
+        "id": "e96d543c-478f-4e09-8961-da24dc34f912",
+        "protocolProfileBehavior": {
+          "disableBodyPruning": true
+        },
+        "request": {
+          "method": "POST",
+          "header": [],
+          "body": {
+            "mode": "raw",
+            "raw": "{\r\n    \"ids\": [1, 2, 22, 33],\r\n    \"comment\": \"ЁМАЁ ЧТО ТАКОЕ\",\r\n    \"initiator\": \"PIZZA\"\r\n}   ",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          },
+          "url": {
+            "raw": "localhost:80/api/v1/documents/submit",
+            "host": [
+              "localhost"
+            ],
+            "port": "80",
+            "path": [
+              "api",
+              "v1",
+              "documents",
+              "submit"
+            ],
+            "query": [
+              {
+                "key": "initiator",
+                "value": "LOLKA",
+                "type": "text",
+                "disabled": true
+              }
+            ]
+          }
+        },
+        "response": [],
+        "createdAt": "2026-02-19T18:44:31.000Z",
+        "updatedAt": "2026-02-23T11:19:11.000Z",
+        "uid": "16666229-e96d543c-478f-4e09-8961-da24dc34f912"
+      },
+      {
+        "name": "апрув",
+        "id": "bb936d04-829f-4571-9b0d-4cc55c126891",
+        "protocolProfileBehavior": {
+          "disableBodyPruning": true
+        },
+        "request": {
+          "method": "POST",
+          "header": [],
+          "body": {
+            "mode": "raw",
+            "raw": "{\r\n    \"ids\": [1, 2, 22, 33],\r\n    \"comment\": \"ЁМАЁ ЧТО ТАКОЕ\",\r\n    \"initiator\": \"фзкщмук\"\r\n}   ",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          },
+          "url": {
+            "raw": "localhost:80/api/v1/documents/approve",
+            "host": [
+              "localhost"
+            ],
+            "port": "80",
+            "path": [
+              "api",
+              "v1",
+              "documents",
+              "approve"
+            ]
+          }
+        },
+        "response": [],
+        "createdAt": "2026-02-19T22:18:03.000Z",
+        "updatedAt": "2026-02-23T11:19:22.000Z",
+        "uid": "16666229-bb936d04-829f-4571-9b0d-4cc55c126891"
+      },
+      {
+        "name": "спам многопоточ",
+        "id": "8ccb1d9c-0375-4c47-b210-cb114c822353",
+        "protocolProfileBehavior": {
+          "disableBodyPruning": true
+        },
+        "request": {
+          "method": "POST",
+          "header": [],
+          "url": {
+            "raw": "localhost:80/api/v1/documents/approve/concurrent-spam?documentId=1&threads=30&attempts=100&initiator=CLOWN",
+            "host": [
+              "localhost"
+            ],
+            "port": "80",
+            "path": [
+              "api",
+              "v1",
+              "documents",
+              "approve",
+              "concurrent-spam"
+            ],
+            "query": [
+              {
+                "key": "documentId",
+                "value": "1"
+              },
+              {
+                "key": "threads",
+                "value": "30"
+              },
+              {
+                "key": "attempts",
+                "value": "100"
+              },
+              {
+                "key": "initiator",
+                "value": "CLOWN"
+              }
+            ]
+          }
+        },
+        "response": [],
+        "createdAt": "2026-02-19T22:54:32.000Z",
+        "updatedAt": "2026-02-23T11:19:36.000Z",
+        "uid": "16666229-8ccb1d9c-0375-4c47-b210-cb114c822353"
+      },
+      {
+        "name": "серч запрос",
+        "id": "53776178-fd59-4829-a7a8-77c672e8ee00",
+        "protocolProfileBehavior": {
+          "disableBodyPruning": true
+        },
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "http://localhost:80/api/v1/documents/search?status=APPROVED&author=GENERATOR&dateFrom=2025-01-01&dateTo=2026-02-23&page=0&size=20&sort=created_at,desc",
+            "protocol": "http",
+            "host": [
+              "localhost"
+            ],
+            "port": "80",
+            "path": [
+              "api",
+              "v1",
+              "documents",
+              "search"
+            ],
+            "query": [
+              {
+                "key": "status",
+                "value": "APPROVED"
+              },
+              {
+                "key": "author",
+                "value": "GENERATOR"
+              },
+              {
+                "key": "dateFrom",
+                "value": "2025-01-01"
+              },
+              {
+                "key": "dateTo",
+                "value": "2026-02-23"
+              },
+              {
+                "key": "page",
+                "value": "0"
+              },
+              {
+                "key": "size",
+                "value": "20"
+              },
+              {
+                "key": "sort",
+                "value": "created_at,desc"
+              }
+            ]
+          }
+        },
+        "response": [],
+        "createdAt": "2026-02-20T08:42:33.000Z",
+        "updatedAt": "2026-02-23T11:19:55.000Z",
+        "uid": "16666229-53776178-fd59-4829-a7a8-77c672e8ee00"
+      }
+    ]
+  }
+}

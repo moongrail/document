@@ -205,15 +205,11 @@ public class DocumentServiceImpl implements DocumentService {
         if (requests == null || requests.isEmpty()) {
             return;
         }
-
         List<Document> documents = requests.stream()
-                .map(r -> {
-                    Document doc = mapper.toCreateDocument(r);
-                    doc.setStatus(DocumentStatus.DRAFT);
-                    return doc;
-                })
+                .map(mapper::toCreateDocument)
                 .toList();
 
+        //Можно было бы поменять этот метод
         documentDao.saveAll(documents);
     }
 }

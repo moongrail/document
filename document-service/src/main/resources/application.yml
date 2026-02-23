@@ -19,8 +19,6 @@ spring:
     hikari:
       maximum-pool-size: 20
       minimum-idle: 1
-  #      connection-timeout: 30000
-  #      idle-timeout: 30000
   jpa:
     hibernate:
       ddl-auto: none
@@ -39,8 +37,8 @@ spring:
 worker:
   batch-size: 50
   submit:
-    cron: "*/30 * * * * *"
+    cron: "*/50 * * * * *"
   approve:
-    cron: "*/45 * * * * *"
+    cron: "*/58 * * * * *"
   initiator: "WORKER"
 

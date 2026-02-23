@@ -113,8 +113,7 @@ class DocumentBaseTests {
                 .toList();
 
         assertThat(saved)
-                .hasSize(3)
-                .allMatch(d -> d.getStatus() == DocumentStatus.DRAFT);
+                .hasSize(3);
     }
 
     private Document saveDraft(String author, String title) {

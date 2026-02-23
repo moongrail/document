@@ -28,12 +28,14 @@
 - `generator` - утилита для массового создания документов
 
 ## Методы контроллеров
-
+POSTMAN_COLLECTION.json, можно подёргать ручки в постмане для удобства, (для хеппи результата (воркеры будут мешать)
+нужно проставлять статус DRAFT в базе у документа 1 id -> далее пройти весь цикл)
 - `POST /documents` - создание нового документа
 - `GET /documents/{id}` - получение документа с историей
 - `GET /documents` - получение списка документов с фильтрацией и пагинацией
 - `POST /documents/submit` - батч отправка документов на submit
 - `POST /documents/approve` - батч одобрение документов на approve
-- `POST /documents/approve/concurrent-spam` - спам метод параллельного concurrent одобрения
+- `POST /documents/approve/concurrent-spam` - спам метод параллельного concurrent 
+одобрения(для постмана статус SUBMITTED у 1 id )
 - `GET /documents/search` - поиск документов
 - `POST /documents/create/batch ` - батч создание документов

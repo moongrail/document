@@ -39,9 +39,9 @@ Limit  (cost=0.14..8.17 rows=1 width=1132) (actual time=0.054..0.055 rows=1 loop
 ->  Index Scan using idx_document_status_author_created_at on document d  (cost=0.14..8.17 rows=1 width=1132)
 
 (actual time=0.053..0.054 rows=1 loops=1)
-Index Cond: (((status)::text = 'SUBMITTED'::text) 
+Index Cond: (((status)::text = 'SUBMITTED'::text)
 
-AND ((author)::text = 'Волков В.В.'::text) AND (created_at >= '2026-02-20 00:00:00'::timestamp without time zone) 
+AND ((author)::text = 'Волков В.В.'::text) AND (created_at >= '2026-02-20 00:00:00'::timestamp without time zone)
 
 AND (created_at <= '2026-02-28 00:00:00'::timestamp without time zone))
 ###
