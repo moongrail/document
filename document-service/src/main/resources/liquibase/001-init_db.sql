@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS document
 
 CREATE UNIQUE INDEX IF NOT EXISTS idx_document_author_title ON document (author, title);
 CREATE INDEX IF NOT EXISTS idx_document_created_at ON document (created_at);
-CREATE INDEX idx_document_status_author_created_at
+CREATE INDEX IF NOT EXISTS idx_document_status_author_created_at
     ON document (status, author, created_at DESC);
 
 CREATE TABLE IF NOT EXISTS document_history
