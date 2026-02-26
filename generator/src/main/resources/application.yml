@@ -9,5 +9,5 @@ logging:
 spring:
   application:
     name: generator
-server:
-  port: 81
+  main:
+    web-application-type: none

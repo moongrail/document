@@ -2,6 +2,8 @@ package ru.itq.fun.generator.api;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.SpringApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 import ru.itq.fun.generator.api.dto.CreateDocumentRequest;
@@ -20,6 +22,8 @@ public class DocumentGeneratorClient {
     public static final int BOUND = 2_000_000_000;
     private final RestClient restClient;
     private final GeneratorProperties props;
+    private final ApplicationContext context;
+
     private final Random random = new Random();
 
     //can be scheduled job
@@ -44,6 +48,8 @@ public class DocumentGeneratorClient {
         }
 
         log.info("Generation complete");
+        log.info("Shutting down application...");
+        SpringApplication.exit(context, () -> 0);
     }
 
     private void sendBatch(List<CreateDocumentRequest> batch) {
