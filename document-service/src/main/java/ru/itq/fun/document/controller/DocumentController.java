@@ -10,12 +10,24 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 import ru.itq.fun.document.dto.CreateDocumentRequest;
 import ru.itq.fun.document.dto.DocumentResponse;
 import ru.itq.fun.document.dto.DocumentSearchRequest;
 import ru.itq.fun.document.dto.DocumentWithHistoryResponse;
-import ru.itq.fun.document.dto.registry.*;
+import ru.itq.fun.document.dto.registry.ApproveDocumentResponse;
+import ru.itq.fun.document.dto.registry.ApproveDocumentsRequest;
+import ru.itq.fun.document.dto.registry.ConcurrentApproveResponse;
+import ru.itq.fun.document.dto.registry.SubmitDocumentsRequest;
+import ru.itq.fun.document.dto.registry.SubmitResultResponse;
 import ru.itq.fun.document.service.DocumentService;
 
 import java.util.List;
@@ -23,7 +35,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/documents")
 @RequiredArgsConstructor
-@Valid
+@Validated
 public class DocumentController {
 
     private final DocumentService documentService;
