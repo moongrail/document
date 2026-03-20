@@ -197,18 +197,6 @@ FOR UPDATE SKIP LOCKED
 
 ---
 
-### Оптимизация поиска
-
-**До оптимизации:**
-```sql
-WHERE CAST(:dateFrom AS timestamp) IS NULL OR d.created_at >= CAST(:dateFrom AS timestamp)
-```
-
-**После оптимизации:**
-```sql
-WHERE (:dateFrom IS NULL OR d.created_at >= :dateFrom)
-```
-
 **Преимущества:**
 - Избегает лишнего приведения типов
 - Лучший план выполнения
