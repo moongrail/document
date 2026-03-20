@@ -14,7 +14,7 @@ WHERE d.status = 'SUBMITTED'
 ORDER BY d.created_at DESC
 LIMIT 20 OFFSET 0;
 ```
-
+что тут понаписал госпаде
 ### API запрос (Postman)
 
 ```http
