@@ -317,4 +317,3 @@ echo $JAVA_HOME
 
 - [EXPLAIN.md](EXPLAIN.md) — оптимизация SQL запросов, планы выполнения
 - [POSTMAN_COLLECTION.json](POSTMAN_COLLECTION.json) — коллекция Postman
-- [QWEN.md](QWEN.md) — полная документация проекта
