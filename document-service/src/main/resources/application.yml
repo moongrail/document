@@ -2,11 +2,6 @@ server:
   port: 80
   servlet:
     context-path: /api/v1
-logging:
-  level:
-    root: info
-  file:
-    name: spam_logs
 
 spring:
   application:
@@ -16,8 +11,6 @@ spring:
     username: "${POSTGRES_USER:postgres}"
     password: "${POSTGRES_PASSWORD:123}"
     driver-class-name: org.postgresql.Driver
-    hikari:
-      maximum-pool-size: 20
   jpa:
     hibernate:
       ddl-auto: none
@@ -26,18 +19,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         jdbc:
-          batch_size: 50
+          batch_size: 100
           order_inserts: true
           order_updates: true
-          default_batch_fetch_size: 50
-  liquibase:
-    change-log: classpath:liquibase/master.xml
-
-worker:
-  batch-size: 50
-  submit:
-    cron: "*/50 * * * * *"
-  approve:
-    cron: "*/58 * * * * *"
-  initiator: "WORKER"
-
+          default_batch_fetch_size: 100

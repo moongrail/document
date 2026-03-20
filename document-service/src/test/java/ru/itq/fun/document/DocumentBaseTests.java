@@ -33,10 +33,18 @@ class DocumentBaseTests {
 
     @Autowired
     private DocumentService documentService;
+
     @Autowired
     private DocumentDao documentDao;
+
     @Autowired
     private ApproveRegistryDao approveRegistryDao;
+
+    @Test
+    void contextLoads() {
+        assertThat(documentDao).isNotNull();
+        assertThat(documentService).isNotNull();
+    }
 
     @Test
     void create_persistsDocumentWithDraftStatus() {
@@ -113,7 +121,8 @@ class DocumentBaseTests {
                 .toList();
 
         assertThat(saved)
-                .hasSize(3);
+                .hasSize(3)
+                .allMatch(d -> d.getStatus() == DocumentStatus.DRAFT);
     }
 
     private Document saveDraft(String author, String title) {

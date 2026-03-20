@@ -6,11 +6,11 @@ CREATE SEQUENCE IF NOT EXISTS document_number_seq
 CREATE TABLE IF NOT EXISTS document
 (
     id          BIGSERIAL PRIMARY KEY,
-    number      BIGINT DEFAULT (NEXTVAL('document_number_seq')) UNIQUE,
+    number      BIGINT DEFAULT NEXTVAL('document_number_seq') UNIQUE,
     author      VARCHAR(255) NOT NULL,
     title       VARCHAR(255) NOT NULL,
-    status      VARCHAR(25)  DEFAULT 'DRAFT',
-    created_at  TIMESTAMP    DEFAULT NOW(),
+    status      VARCHAR(25) DEFAULT 'DRAFT',
+    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     modified_at TIMESTAMP
 );
 
@@ -23,9 +23,9 @@ CREATE TABLE IF NOT EXISTS document_history
 (
     id          BIGSERIAL PRIMARY KEY,
     created_by  VARCHAR(255) NOT NULL,
-    document_id BIGINT       NOT NULL REFERENCES document (id) ON DELETE CASCADE,
-    created_at  TIMESTAMP DEFAULT NOW(),
-    operation   VARCHAR(25)  NOT NULL,
+    document_id BIGINT NOT NULL REFERENCES document (id) ON DELETE CASCADE,
+    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    operation   VARCHAR(25) NOT NULL,
     comment     TEXT
 );
 
@@ -33,6 +33,6 @@ CREATE TABLE IF NOT EXISTS approve_registry
 (
     id          BIGSERIAL PRIMARY KEY,
     approve_by  VARCHAR(255) NOT NULL,
-    document_id BIGINT       NOT NULL UNIQUE REFERENCES document (id) ON DELETE CASCADE,
-    approve_at  TIMESTAMP DEFAULT NOW()
+    document_id BIGINT NOT NULL UNIQUE REFERENCES document (id) ON DELETE CASCADE,
+    approve_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

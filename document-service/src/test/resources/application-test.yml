@@ -6,27 +6,23 @@ spring:
     password:
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create-drop
     database-platform: org.hibernate.dialect.H2Dialect
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
-        format_sql: true
-        jdbc:
-          batch_size: 50
+        format_sql: false
   liquibase:
-    change-log: classpath:liquibase/master-test.xml
-    enabled: true
+    enabled: false
 
 worker:
   batch-size: 50
   submit:
-    cron: "0 0 0 29 2 ?"
+    cron: "-"
   approve:
-    cron: "0 0 0 29 2 ?"
+    cron: "-"
   initiator: "TEST_WORKER"
 
 logging:
   level:
-    ru.itq.fun.document: DEBUG
-    org.springframework.transaction: DEBUG
+    ru.itq.fun.document: WARN

@@ -13,17 +13,15 @@ ext {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-liquibase'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'org.springframework.boot:spring-boot-starter-aop:3.3.4'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
 
     runtimeOnly 'org.postgresql:postgresql'
+    testImplementation 'com.h2database:h2'
 
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
-    testImplementation 'com.h2database:h2'
-
 }
 
 bootJar {

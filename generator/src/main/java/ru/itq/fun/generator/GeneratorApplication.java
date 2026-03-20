@@ -4,10 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import ru.itq.fun.generator.config.DocumentServiceProperties;
 import ru.itq.fun.generator.config.GeneratorProperties;
 
 @SpringBootApplication
-@EnableConfigurationProperties(GeneratorProperties.class)
+@EnableConfigurationProperties({GeneratorProperties.class, DocumentServiceProperties.class})
 @Slf4j
 public class GeneratorApplication {
 

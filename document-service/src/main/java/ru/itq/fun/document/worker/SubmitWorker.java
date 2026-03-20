@@ -26,7 +26,7 @@ public class SubmitWorker {
     private final DocumentService documentService;
     private final WorkerProperties props;
 
-    @Scheduled(cron = "${worker.submit.cron}")
+    @Scheduled(cron = "${worker.submit.cron:-}")
     public void process() {
         log.info("SubmitWorker started");
         Pageable pageable = PageRequest.of(0, props.batchSize());

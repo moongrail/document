@@ -10,4 +10,11 @@ public record WorkerProperties(
         String initiator
 ) {
     public record ScheduleProps(String cron) {}
+
+    public WorkerProperties {
+        if (batchSize == 0) batchSize = 50;
+        if (submit == null) submit = new ScheduleProps("-");
+        if (approve == null) approve = new ScheduleProps("-");
+        if (initiator == null) initiator = "WORKER";
+    }
 }

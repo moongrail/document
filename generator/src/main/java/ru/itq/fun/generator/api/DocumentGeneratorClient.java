@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 import ru.itq.fun.generator.api.dto.CreateDocumentRequest;
+import ru.itq.fun.generator.config.DocumentServiceProperties;
 import ru.itq.fun.generator.config.GeneratorProperties;
 
 import java.util.List;
@@ -22,11 +23,11 @@ public class DocumentGeneratorClient {
     public static final int BOUND = 2_000_000_000;
     private final RestClient restClient;
     private final GeneratorProperties props;
+    private final DocumentServiceProperties serviceProps;
     private final ApplicationContext context;
 
     private final Random random = new Random();
 
-    //can be scheduled job
     public void generateDocuments() {
         int total = props.count();
         int batchSize = props.batchSize();
@@ -54,7 +55,7 @@ public class DocumentGeneratorClient {
 
     private void sendBatch(List<CreateDocumentRequest> batch) {
         restClient.post()
-                .uri(props.documentServiceUrl() + "/documents/create/batch")
+                .uri(serviceProps.url() + "/documents/create/batch")
                 .body(batch)
                 .retrieve()
                 .toBodilessEntity();

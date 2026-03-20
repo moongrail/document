@@ -25,7 +25,7 @@ public class ApproveWorker {
     private final DocumentService documentService;
     private final WorkerProperties props;
 
-    @Scheduled(cron = "${worker.approve.cron}")
+    @Scheduled(cron = "${worker.approve.cron:-}")
     public void process() {
         log.info("ApproveWorker started");
 

@@ -25,16 +25,17 @@ import ru.itq.fun.document.exception.DocumentConflictException;
 import ru.itq.fun.document.exception.DocumentNotFoundException;
 import ru.itq.fun.document.mapper.DocumentMapper;
 
+import java.sql.Timestamp;
 import java.time.LocalTime;
-import java.time.ZoneOffset;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Service
 @RequiredArgsConstructor
@@ -46,6 +47,7 @@ public class DocumentServiceImpl implements DocumentService {
     private final DocumentDao documentDao;
     private final DocumentMapper mapper;
     private final DocumentBatchService documentBatchService;
+    private final Executor virtualThreadExecutor;
 
     @Override
     @LogExecutionTime(step = "create document")
@@ -146,26 +148,18 @@ public class DocumentServiceImpl implements DocumentService {
     public ConcurrentApproveResponse spamConcurrentApprove(
             Long documentId, int threads, int attempts, String initiator) {
 
-        ExecutorService executor = Executors.newFixedThreadPool(threads);
-        List<Future<ApproveStatusResponse>> futures = new ArrayList<>();
+        List<CompletableFuture<ApproveStatusResponse>> futures = IntStream.range(0, attempts)
+                .mapToObj(i -> CompletableFuture.supplyAsync(
+                        () -> documentBatchService.approveDocument(documentId, initiator, "concurrent test"),
+                        virtualThreadExecutor
+                ))
+                .toList();
 
-        for (int i = 0; i < attempts; i++) {
-            futures.add(executor.submit(() ->
-                    documentBatchService.approveDocument(documentId, initiator, "concurrent test")
-            ));
-        }
-
-        executor.close();
+        CompletableFuture<ApproveStatusResponse>[] futuresArray = futures.toArray(CompletableFuture[]::new);
+        CompletableFuture.allOf(futuresArray).join();
 
         Map<ApproveStatusResponse, Long> counts = futures.stream()
-                .map(f -> {
-                    try {
-                        return f.get();
-                    } catch (Exception e) {
-                        log.error("Attempt failed: {}", e.getMessage());
-                        return ApproveStatusResponse.ERROR;
-                    }
-                })
+                .map(CompletableFuture::join)
                 .collect(Collectors.groupingBy(
                         Function.identity(),
                         Collectors.counting()
@@ -191,11 +185,11 @@ public class DocumentServiceImpl implements DocumentService {
     @LogExecutionTime(step = "searchDocuments")
     public Page<DocumentResponse> searchDocuments(DocumentSearchRequest request, Pageable pageable) {
         return documentDao.searchDocuments(
-                request.status() != null ? request.status().name() : null,
+                request.status().name().toLowerCase(),
                 request.author(),
-                request.dateFrom() != null ? request.dateFrom().atStartOfDay().toInstant(ZoneOffset.UTC) : null,
-                request.dateTo() != null ? request.dateTo().atTime(LocalTime.MAX).toInstant(ZoneOffset.UTC) : null,
-                PageRequest.of(pageable.getPageNumber(), pageable.getPageSize())
+                request.dateFrom() != null ? Timestamp.from(request.dateFrom().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()) : null,
+                request.dateTo() != null ? Timestamp.from(request.dateTo().atTime(LocalTime.MAX).atZone(ZoneId.systemDefault()).toInstant()) : null,
+                PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), pageable.getSort())
         ).map(mapper::toDocumentResponse);
     }
 
@@ -207,9 +201,9 @@ public class DocumentServiceImpl implements DocumentService {
         }
         List<Document> documents = requests.stream()
                 .map(mapper::toCreateDocument)
+                .peek(doc -> doc.setStatus(DocumentStatus.DRAFT))
                 .toList();
 
-        //Можно было бы поменять этот метод
         documentDao.saveAll(documents);
     }
 }

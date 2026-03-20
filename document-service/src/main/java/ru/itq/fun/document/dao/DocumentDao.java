@@ -108,8 +108,8 @@ public interface DocumentDao extends JpaRepository<Document, Long> {
     Page<Document> searchDocuments(
             @Param("status") String status,
             @Param("author") String author,
-            @Param("dateFrom") Instant dateFrom,
-            @Param("dateTo") Instant dateTo,
+            @Param("dateFrom") java.sql.Timestamp dateFrom,
+            @Param("dateTo") java.sql.Timestamp dateTo,
             Pageable pageable);
 
     @Query("SELECT d.id FROM Document d WHERE d.status = :status")

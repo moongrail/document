@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '4.0.2' apply false
+    id 'org.springframework.boot' version '3.5.4' apply false
     id 'io.spring.dependency-management' version '1.1.7' apply false
 }
 
@@ -18,7 +18,7 @@ subprojects {
 
     dependencyManagement {
         imports {
-            mavenBom "org.springframework.boot:spring-boot-dependencies:4.0.2"
+            mavenBom "org.springframework.boot:spring-boot-dependencies:3.5.4"
         }
     }
 
@@ -50,7 +50,7 @@ subprojects {
 
     tasks.register('generatorRun') {
         group = 'application'
-        description = 'Run geerator service'
+        description = 'Run generator service'
         dependsOn ':generator:bootRun'
     }
 
